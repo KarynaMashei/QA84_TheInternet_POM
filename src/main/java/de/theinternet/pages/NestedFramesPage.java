@@ -1,12 +1,29 @@
 package de.theinternet.pages;
 
 import de.theinternet.core.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class NestedFramesPage extends BasePage {
 
-    private final By frameBody = By.tagName("body");
+    @FindBy(name = "frame-top")
+    private WebElement topFrame;
+
+    @FindBy(name = "frame-left")
+    private WebElement leftFrame;
+
+    @FindBy(name = "frame-middle")
+    private WebElement middleFrame;
+
+    @FindBy(name = "frame-right")
+    private WebElement rightFrame;
+
+    @FindBy(name = "frame-bottom")
+    private WebElement bottomFrame;
+
+    @FindBy(tagName = "body")
+    private WebElement frameBody;
 
     public NestedFramesPage(WebDriver driver) {
         super(driver);
@@ -18,32 +35,32 @@ public class NestedFramesPage extends BasePage {
     }
 
     public String getLeftFrameText() {
-        return getTopFrameText("frame-left");
+        return getTopFrameText(leftFrame);
     }
 
     public String getMiddleFrameText() {
-        return getTopFrameText("frame-middle");
+        return getTopFrameText(middleFrame);
     }
 
     public String getRightFrameText() {
-        return getTopFrameText("frame-right");
+        return getTopFrameText(rightFrame);
     }
 
     public String getBottomFrameText() {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame("frame-bottom");
+        driver.switchTo().frame(bottomFrame);
 
-        String text = getText(driver.findElement(frameBody)).trim();
+        String text = getText(frameBody).trim();
         driver.switchTo().defaultContent();
         return text;
     }
 
-    private String getTopFrameText(String frameName) {
+    private String getTopFrameText(WebElement innerFrame) {
         driver.switchTo().defaultContent();
-        driver.switchTo().frame("frame-top");
-        driver.switchTo().frame(frameName);
+        driver.switchTo().frame(topFrame);
+        driver.switchTo().frame(innerFrame);
 
-        String text = getText(driver.findElement(frameBody)).trim();
+        String text = getText(frameBody).trim();
         driver.switchTo().defaultContent();
         return text;
     }

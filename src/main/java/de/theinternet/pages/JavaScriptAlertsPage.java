@@ -1,21 +1,23 @@
 package de.theinternet.pages;
 
 import de.theinternet.core.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class JavaScriptAlertsPage extends BasePage {
 
-    private final By jsAlertButton =
-            By.xpath("//button[text()='Click for JS Alert']");
+    @FindBy(xpath = "//button[text()='Click for JS Alert']")
+    private WebElement jsAlertButton;
 
-    private final By jsConfirmButton =
-            By.xpath("//button[text()='Click for JS Confirm']");
+    @FindBy(xpath = "//button[text()='Click for JS Confirm']")
+    private WebElement jsConfirmButton;
 
-    private final By jsPromptButton =
-            By.xpath("//button[text()='Click for JS Prompt']");
+    @FindBy(xpath = "//button[text()='Click for JS Prompt']")
+    private WebElement jsPromptButton;
 
-    private final By result = By.id("result");
+    @FindBy(id = "result")
+    private WebElement result;
 
     public JavaScriptAlertsPage(WebDriver driver) {
         super(driver);
@@ -27,17 +29,17 @@ public class JavaScriptAlertsPage extends BasePage {
     }
 
     public JavaScriptAlertsPage clickJsAlertButton() {
-        click(driver.findElement(jsAlertButton));
+        click(jsAlertButton);
         return this;
     }
 
     public JavaScriptAlertsPage clickJsConfirmButton() {
-        click(driver.findElement(jsConfirmButton));
+        click(jsConfirmButton);
         return this;
     }
 
     public JavaScriptAlertsPage clickJsPromptButton() {
-        click(driver.findElement(jsPromptButton));
+        click(jsPromptButton);
         return this;
     }
 
@@ -61,6 +63,6 @@ public class JavaScriptAlertsPage extends BasePage {
     }
 
     public String getResultText() {
-        return getText(driver.findElement(result));
+        return getText(result);
     }
 }

@@ -2,15 +2,15 @@ package de.theinternet.tests;
 
 import de.theinternet.core.TestBase;
 import de.theinternet.pages.JavaScriptAlertsPage;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class JavaScriptAlertsTests extends TestBase {
 
     private JavaScriptAlertsPage alertsPage;
 
-    @BeforeMethod
+    @BeforeEach
     public void openAlertsPage() {
         alertsPage = new JavaScriptAlertsPage(driver).openPage();
     }
@@ -19,16 +19,16 @@ public class JavaScriptAlertsTests extends TestBase {
     public void jsAlertTest() {
         alertsPage.clickJsAlertButton();
 
-        Assert.assertEquals(
-                alertsPage.getAlertText(),
-                "I am a JS Alert"
+        Assertions.assertEquals(
+                "I am a JS Alert",
+                alertsPage.getAlertText()
         );
 
         alertsPage.acceptAlert();
 
-        Assert.assertEquals(
-                alertsPage.getResultText(),
-                "You successfully clicked an alert"
+        Assertions.assertEquals(
+                "You successfully clicked an alert",
+                alertsPage.getResultText()
         );
     }
 
@@ -36,16 +36,16 @@ public class JavaScriptAlertsTests extends TestBase {
     public void jsConfirmAcceptTest() {
         alertsPage.clickJsConfirmButton();
 
-        Assert.assertEquals(
-                alertsPage.getAlertText(),
-                "I am a JS Confirm"
+        Assertions.assertEquals(
+                "I am a JS Confirm",
+                alertsPage.getAlertText()
         );
 
         alertsPage.acceptAlert();
 
-        Assert.assertEquals(
-                alertsPage.getResultText(),
-                "You clicked: Ok"
+        Assertions.assertEquals(
+                "You clicked: Ok",
+                alertsPage.getResultText()
         );
     }
 
@@ -54,9 +54,9 @@ public class JavaScriptAlertsTests extends TestBase {
         alertsPage.clickJsConfirmButton();
         alertsPage.dismissAlert();
 
-        Assert.assertEquals(
-                alertsPage.getResultText(),
-                "You clicked: Cancel"
+        Assertions.assertEquals(
+                "You clicked: Cancel",
+                alertsPage.getResultText()
         );
     }
 
@@ -68,9 +68,9 @@ public class JavaScriptAlertsTests extends TestBase {
         alertsPage.typeInAlert(text);
         alertsPage.acceptAlert();
 
-        Assert.assertEquals(
-                alertsPage.getResultText(),
-                "You entered: " + text
+        Assertions.assertEquals(
+                "You entered: " + text,
+                alertsPage.getResultText()
         );
     }
 }

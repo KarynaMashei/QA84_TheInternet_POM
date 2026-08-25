@@ -2,39 +2,39 @@ package de.theinternet.tests;
 
 import de.theinternet.core.TestBase;
 import de.theinternet.pages.NestedFramesPage;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class NestedFramesTests extends TestBase {
 
     private NestedFramesPage nestedFramesPage;
 
-    @BeforeMethod
+    @BeforeEach
     public void openNestedFramesPage() {
         nestedFramesPage = new NestedFramesPage(driver).openPage();
     }
 
     @Test
     public void nestedFramesTextTest() {
-        Assert.assertEquals(
-                nestedFramesPage.getLeftFrameText(),
-                "LEFT"
+        Assertions.assertEquals(
+                "LEFT",
+                nestedFramesPage.getLeftFrameText()
         );
 
-        Assert.assertEquals(
-                nestedFramesPage.getMiddleFrameText(),
-                "MIDDLE"
+        Assertions.assertEquals(
+                "MIDDLE",
+                nestedFramesPage.getMiddleFrameText()
         );
 
-        Assert.assertEquals(
-                nestedFramesPage.getRightFrameText(),
-                "RIGHT"
+        Assertions.assertEquals(
+                "RIGHT",
+                nestedFramesPage.getRightFrameText()
         );
 
-        Assert.assertEquals(
-                nestedFramesPage.getBottomFrameText(),
-                "BOTTOM"
+        Assertions.assertEquals(
+                "BOTTOM",
+                nestedFramesPage.getBottomFrameText()
         );
     }
 }

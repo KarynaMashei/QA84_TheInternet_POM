@@ -1,17 +1,18 @@
 package de.theinternet.pages;
 
 import de.theinternet.core.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class WindowsPage extends BasePage {
 
-    private final By clickHereLink = By.linkText("Click Here");
-    private final By heading = By.tagName("h3");
+    @FindBy(linkText = "Click Here")
+    private WebElement clickHereLink;
+
+    @FindBy(tagName = "h3")
+    private WebElement heading;
 
     public WindowsPage(WebDriver driver) {
         super(driver);
@@ -23,14 +24,14 @@ public class WindowsPage extends BasePage {
     }
 
     public WindowsPage clickHere() {
-        click(driver.findElement(clickHereLink));
+        click(clickHereLink);
         return this;
     }
 
     public WindowsPage switchToNewWindow() {
         String originalWindow = driver.getWindowHandle();
 
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        getWait(10)
                 .until(ExpectedConditions.numberOfWindowsToBe(2));
 
         String newWindow = driver.getWindowHandles()
@@ -46,7 +47,7 @@ public class WindowsPage extends BasePage {
     }
 
     public String getHeadingText() {
-        return getText(driver.findElement(heading));
+        return getText(heading);
     }
 
     public String getBrowserTitle() {

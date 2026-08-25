@@ -2,15 +2,15 @@ package de.theinternet.tests;
 
 import de.theinternet.core.TestBase;
 import de.theinternet.pages.WindowsPage;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class WindowsTests extends TestBase {
 
     private WindowsPage windowsPage;
 
-    @BeforeMethod
+    @BeforeEach
     public void openWindowsPage() {
         windowsPage = new WindowsPage(driver).openPage();
     }
@@ -20,14 +20,14 @@ public class WindowsTests extends TestBase {
         windowsPage.clickHere()
                 .switchToNewWindow();
 
-        Assert.assertEquals(
-                windowsPage.getHeadingText(),
-                "New Window"
+        Assertions.assertEquals(
+                "New Window",
+                windowsPage.getHeadingText()
         );
 
-        Assert.assertEquals(
-                windowsPage.getBrowserTitle(),
-                "New Window"
+        Assertions.assertEquals(
+                "New Window",
+                windowsPage.getBrowserTitle()
         );
     }
 }
